@@ -1,0 +1,7 @@
+[server]
+host = "127.0.0.1"
+port = 38123
+
+[database]
+# Optional override. Empty falls back to the DATABASE_URL environment variable.
+url = ""

@@ -1,0 +1,21 @@
+# ---- build / runtime artifacts ----
+backend/target/
+backend/backend.log
+backend/.env
+frontend/node_modules/
+frontend/dist/
+dist/
+*.log
+
+# ---- local scratch (not part of the committed project) ----
+.digest_tmp/
+参考/
+ConTeXt/
+SQL/
+*.tmp
+
+# ---- editor / OS ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

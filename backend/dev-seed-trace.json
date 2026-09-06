@@ -1,0 +1,55 @@
+{
+  "nodes": [
+    { "kind": "software_requirement", "external_source": "sr-sys", "external_ref": "SR-1", "module": "登录认证", "title": "支持账号密码登录", "description": "系统应提供账号+密码的登录方式；密码校验失败时给出明确、不泄露账号存在性的提示。", "attributes": {} },
+    { "kind": "software_requirement", "external_source": "sr-sys", "external_ref": "SR-2", "module": "登录认证", "title": "支持第三方扫码登录", "description": "系统应支持通过第三方平台扫码完成登录并正确回跳。", "attributes": {} },
+    { "kind": "software_requirement", "external_source": "sr-sys", "external_ref": "SR-3", "module": "登录认证", "title": "连续失败达到阈值应锁定账户", "description": "同一账号连续登录失败达到阈值（如 5 次）后应临时锁定，并提示剩余解锁时间。", "attributes": {} },
+    { "kind": "software_requirement", "external_source": "sr-sys", "external_ref": "SR-4", "module": "登录认证", "title": "忘记密码可通过注册邮箱找回", "description": "用户忘记密码时应能通过注册邮箱收到重置链接并设置新密码。", "attributes": {} },
+    { "kind": "software_requirement", "external_source": "req-doc", "external_ref": "R-5.4", "module": "登录认证", "title": "登录相关操作需记录安全审计日志（来自文档 5.4 节）", "description": "该需求由测试人员依据被测系统外部文档人工录入（external_source=req-doc），当前尚无测试项/记录，故也没有报告回答。", "attributes": { "source_section": "5.4" } },
+
+    { "kind": "test_item", "external_source": "sr-sys", "external_ref": "IT-1", "module": "登录功能", "title": "账号密码登录校验", "description": "对账号与密码进行校验，正确则建立登录态，错误则返回失败提示（满足 SR-1）。", "attributes": {} },
+    { "kind": "test_item", "external_source": "sr-sys", "external_ref": "IT-2", "module": "登录功能", "title": "扫码授权与回调登录", "description": "发起第三方扫码授权，授权成功后在回调中建立登录态（满足 SR-2）。", "attributes": {} },
+    { "kind": "test_item", "external_source": "sr-sys", "external_ref": "IT-3", "module": "登录功能", "title": "失败计数与账户锁定策略", "description": "记录连续失败次数，达到阈值锁定账户并支持解锁计时（满足 SR-3）。", "attributes": {} },
+    { "kind": "test_item", "external_source": "sr-sys", "external_ref": "IT-4", "module": "登录功能", "title": "邮箱找回密码流程", "description": "向注册邮箱发送重置链接，验证后可设置新密码（满足 SR-4）。", "attributes": {} },
+
+    { "kind": "test_case", "external_source": "sr-sys", "external_ref": "TC-1", "module": "账号登录", "title": "正确账号密码登录成功", "description": "输入正确账号与密码，断言登录成功并进入主界面。", "attributes": {} },
+    { "kind": "test_case", "external_source": "sr-sys", "external_ref": "TC-2", "module": "账号登录", "title": "错误密码给出安全提示", "description": "输入错误密码，断言提示语不泄露账号是否存在，且单次失败不触发锁定。", "attributes": {} },
+    { "kind": "test_case", "external_source": "sr-sys", "external_ref": "TC-3", "module": "扫码登录", "title": "扫码登录成功并回跳原页面", "description": "模拟第三方授权成功，断言登录态建立并回跳。", "attributes": {} },
+    { "kind": "test_case", "external_source": "sr-sys", "external_ref": "TC-4", "module": "账号登录", "title": "连续 5 次失败触发锁定", "description": "连续输错密码 5 次，断言账户锁定并提示解锁时间。", "attributes": {} },
+    { "kind": "test_case", "external_source": "sr-sys", "external_ref": "TC-5", "module": "找回密码", "title": "邮箱重置密码后可用新密码登录", "description": "通过邮箱链接设置新密码，断言可用新密码成功登录。", "attributes": {} },
+
+    { "kind": "test_record", "external_source": "sr-sys", "external_ref": "REC-1", "module": "登录认证执行", "title": "TC-1 执行记录：通过", "description": "实际执行 TC-1 的结果记录：登录成功进入主界面。", "attributes": {} },
+    { "kind": "test_record", "external_source": "sr-sys", "external_ref": "REC-2", "module": "登录认证执行", "title": "TC-2 执行记录：通过", "description": "实际执行 TC-2 的结果记录：错误密码提示安全，未泄露账号存在性。", "attributes": {} },
+    { "kind": "test_record", "external_source": "sr-sys", "external_ref": "REC-3", "module": "登录认证执行", "title": "TC-3 执行记录：通过", "description": "实际执行 TC-3 的结果记录：扫码授权成功并正确回跳。", "attributes": {} },
+    { "kind": "test_record", "external_source": "sr-sys", "external_ref": "REC-4", "module": "登录认证执行", "title": "TC-4 执行记录：通过", "description": "实际执行 TC-4 的结果记录：连续 5 次失败如期触发账户锁定。", "attributes": {} },
+    { "kind": "test_record", "external_source": "sr-sys", "external_ref": "REC-5", "module": "登录认证执行", "title": "TC-5 执行记录：通过", "description": "实际执行 TC-5 的结果记录：重置后可用新密码登录。", "attributes": {} },
+
+    { "kind": "test_report", "external_source": "sr-sys", "external_ref": "RPT-1", "module": "需求回答", "title": "SR-1 账号密码登录 · 符合性回答", "description": "依据 REC-1、REC-2（由 SR-1 派生链上的用例执行而来）回答 SR-1：软件确已满足该需求描述。", "attributes": {} },
+    { "kind": "test_report", "external_source": "sr-sys", "external_ref": "RPT-2", "module": "需求回答", "title": "SR-2 第三方扫码登录 · 符合性回答", "description": "依据 REC-3（由 SR-2 派生链上的用例执行而来）回答 SR-2：软件确已满足该需求描述。", "attributes": {} },
+    { "kind": "test_report", "external_source": "sr-sys", "external_ref": "RPT-3", "module": "需求回答", "title": "SR-3 失败锁定 · 符合性回答", "description": "依据 REC-4（由 SR-3 派生链上的用例执行而来）回答 SR-3：软件确已满足该需求描述。", "attributes": {} },
+    { "kind": "test_report", "external_source": "sr-sys", "external_ref": "RPT-4", "module": "需求回答", "title": "SR-4 找回密码 · 符合性回答", "description": "依据 REC-5（由 SR-4 派生链上的用例执行而来）回答 SR-4：软件确已满足该需求描述。", "attributes": {} }
+  ],
+  "links": [
+    { "source": { "external_source": "sr-sys", "external_ref": "IT-1" }, "target": { "external_source": "sr-sys", "external_ref": "SR-1" }, "link_type": "derives_from" },
+    { "source": { "external_source": "sr-sys", "external_ref": "IT-2" }, "target": { "external_source": "sr-sys", "external_ref": "SR-2" }, "link_type": "derives_from" },
+    { "source": { "external_source": "sr-sys", "external_ref": "IT-3" }, "target": { "external_source": "sr-sys", "external_ref": "SR-3" }, "link_type": "derives_from" },
+    { "source": { "external_source": "sr-sys", "external_ref": "IT-4" }, "target": { "external_source": "sr-sys", "external_ref": "SR-4" }, "link_type": "derives_from" },
+
+    { "source": { "external_source": "sr-sys", "external_ref": "TC-1" }, "target": { "external_source": "sr-sys", "external_ref": "IT-1" }, "link_type": "part_of" },
+    { "source": { "external_source": "sr-sys", "external_ref": "TC-2" }, "target": { "external_source": "sr-sys", "external_ref": "IT-1" }, "link_type": "part_of" },
+    { "source": { "external_source": "sr-sys", "external_ref": "TC-3" }, "target": { "external_source": "sr-sys", "external_ref": "IT-2" }, "link_type": "part_of" },
+    { "source": { "external_source": "sr-sys", "external_ref": "TC-4" }, "target": { "external_source": "sr-sys", "external_ref": "IT-3" }, "link_type": "part_of" },
+    { "source": { "external_source": "sr-sys", "external_ref": "TC-5" }, "target": { "external_source": "sr-sys", "external_ref": "IT-4" }, "link_type": "part_of" },
+
+    { "source": { "external_source": "sr-sys", "external_ref": "REC-1" }, "target": { "external_source": "sr-sys", "external_ref": "TC-1" }, "link_type": "verifies" },
+    { "source": { "external_source": "sr-sys", "external_ref": "REC-2" }, "target": { "external_source": "sr-sys", "external_ref": "TC-2" }, "link_type": "verifies" },
+    { "source": { "external_source": "sr-sys", "external_ref": "REC-3" }, "target": { "external_source": "sr-sys", "external_ref": "TC-3" }, "link_type": "verifies" },
+    { "source": { "external_source": "sr-sys", "external_ref": "REC-4" }, "target": { "external_source": "sr-sys", "external_ref": "TC-4" }, "link_type": "verifies" },
+    { "source": { "external_source": "sr-sys", "external_ref": "REC-5" }, "target": { "external_source": "sr-sys", "external_ref": "TC-5" }, "link_type": "verifies" },
+
+    { "source": { "external_source": "sr-sys", "external_ref": "RPT-1" }, "target": { "external_source": "sr-sys", "external_ref": "REC-1" }, "link_type": "derives_from" },
+    { "source": { "external_source": "sr-sys", "external_ref": "RPT-1" }, "target": { "external_source": "sr-sys", "external_ref": "REC-2" }, "link_type": "derives_from" },
+    { "source": { "external_source": "sr-sys", "external_ref": "RPT-2" }, "target": { "external_source": "sr-sys", "external_ref": "REC-3" }, "link_type": "derives_from" },
+    { "source": { "external_source": "sr-sys", "external_ref": "RPT-3" }, "target": { "external_source": "sr-sys", "external_ref": "REC-4" }, "link_type": "derives_from" },
+    { "source": { "external_source": "sr-sys", "external_ref": "RPT-4" }, "target": { "external_source": "sr-sys", "external_ref": "REC-5" }, "link_type": "derives_from" }
+  ]
+}

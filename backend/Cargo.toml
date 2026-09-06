@@ -1,0 +1,22 @@
+[package]
+name = "mbse-testlib-backend"
+version = "0.1.0"
+edition = "2021"
+description = "MBSE 测试子系统：需求追踪 + 文档模板 + 执行清单（面向测试人员的 MBSE 子系统）"
+
+[dependencies]
+anyhow = "1"
+async-trait = "0.1"
+axum = "0.8"
+chrono = { version = "0.4", features = ["serde"] }
+dotenvy = "0.15"
+log = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio", "tls-rustls", "postgres", "migrate", "macros", "uuid", "chrono", "json"] }
+tokio = { version = "1", features = ["full"] }
+toml = "0.8"
+tower-http = { version = "0.6", features = ["cors"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v4", "serde"] }
